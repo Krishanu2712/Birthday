@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Sweta ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* Sections */
+.section {
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.active { display: flex; }
+
+/* Password */
+#login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: #ff4e50;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Name Glow */
+.name {
+    font-size: 3rem;
+    animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 30px yellow; }
+}
+
+/* Chat UI */
+.chat-box {
+    width: 90%;
+    max-width: 350px;
+    background: #fff;
+    color: black;
+    border-radius: 15px;
+    padding: 10px;
+    height: 400px;
+    overflow-y: auto;
+}
+.msg {
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 10px;
+    max-width: 70%;
+}
+.left { background: #eee; text-align: left; }
+.right { background: #ff758c; color: white; margin-left: auto; }
+
+/* Letter */
+.letter {
+    width: 80%;
+    max-width: 600px;
+    line-height: 1.6;
+    border-right: 2px solid white;
+    white-space: normal;
+    font-size: 1.2rem;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+/* Gallery */
+.slider {
+    width: 80%;
+    max-width: 300px;
+    overflow: hidden;
+}
+.slides { display: flex; transition: 0.5s; }
+.slides img { width: 100%; }
+
+/* Hearts */
+.heart {
+    position: fixed;
+    color: red;
+    animation: float 5s linear infinite;
+}
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="preety little baby.mp3">
+</audio>
+
+<!-- PASSWORD -->
+<div id="login">
+    <div>
+        <h2>Enter Password 🔐</h2>
+        <input type="password" id="password">
+        <br>
+        <button onclick="checkPassword()">Enter</button>
+    </div>
+</div>
+
+<div id="main" style="display:none;">
+
+<!-- SECTION 1 -->
+<div class="section active" id="sec1">
+    <h1>Happy Birthday</h1>
+    <div class="name">Sweta ❤️</div>
+    <button onclick="next(2)">Next</button>
+</div>
+
+<!-- SECTION 2 CHAT -->
+<div class="section" id="sec2">
+    <h2>Our Chats 💬</h2>
+    <div class="chat-box" id="chat"></div>
+    <button onclick="startChat()">Start Chat</button>
+    <button onclick="next(3)">Next</button>
+</div>
+
+<!-- SECTION 3 LETTER -->
+<div class="section" id="sec3">
+    <h2>My Letter 💌</h2>
+    <div class="letter" id="letter"></div>
+    <button onclick="startLetter()">Show Letter</button>
+    <button onclick="next(4)">Next</button>
+</div>
+
+<!-- SECTION 4 GALLERY -->
+<div class="section" id="sec4">
+    <h2>Memories 📸</h2>
+    <div class="slider">
+        <div class="slides" id="slides">
+            <img src="img1.jpeg">
+            <img src="img2.jpeg">
+            <img src="img3.jpeg">
+            <img src="img4.jpeg">
+            <img src="img5.jpeg">
+        </div>
+    </div>
+    <button onclick="prevSlide()">⬅</button>
+    <button onclick="nextSlide()">➡</button>
+</div>
+
+</div>
+
+<script>
+
+/* PASSWORD + MUSIC */
+function checkPassword() {
+    let pass = document.getElementById("password").value;
+    if(pass === "love1904") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("main").style.display = "block";
+        document.getElementById("music").play();
+    } else {
+        alert("Wrong password 😢");
+    }
+}
+
+/* SECTION */
+function next(num) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById("sec"+num).classList.add("active");
+}
+
+/* CHAT */
+let messages = [
+    "Hey my future wifiee ❤️",
+    "Happy Birthday baby 🎂",
+    "You are my cutieeee pieee 💖",
+    "I’m so lucky to have you 😗 ",
+    "I love you forever 😘"
+];
+
+function startChat() {
+    let chat = document.getElementById("chat");
+    chat.innerHTML = "";
+    let i = 0;
+
+    let interval = setInterval(() => {
+        let msg = document.createElement("div");
+        msg.className = "msg " + (i % 2 ? "right" : "left");
+        msg.innerText = messages[i];
+        chat.appendChild(msg);
+        chat.scrollTop = chat.scrollHeight;
+        i++;
+        if(i >= messages.length) clearInterval(interval);
+    }, 1000);
+}
+
+/* LETTER */
+let text = "Sweta, Happy Birthday to the most beautiful part of my life. Today isn't just your birthday... it's the day the world became a better place because you were born. Your smile is my favourite sight. Your voice is my favourite sound. And your love... is my greatestt blessing. I wish I could be there right now, holding your hand, looking into your eyes and telling you how much I love you. But even if I'm not there physically, my heart is always with you. You are my today, my tomorrow and my forever.❤️😗";
+
+function startLetter() {
+    let i = 0;
+    let letter = document.getElementById("letter");
+    letter.innerHTML = "";
+
+    let typing = setInterval(() => {
+        letter.innerHTML += text[i];
+        i++;
+        if(i >= text.length) clearInterval(typing);
+    }, 50);
+}
+
+/* SLIDER */
+let index = 0;
+function showSlide() {
+    document.getElementById("slides").style.transform =
+        "translateX(" + (-index * 100) + "%)";
+}
+function nextSlide() {
+    index = (index + 1) % 5;
+    showSlide();
+}
+function prevSlide() {
+    index = (index - 1 + 5) % 5;
+    showSlide();
+}
+
+/* HEARTS */
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.classList.add("heart");
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}, 300);
+
+</script>
+
+</body>
+</html>
